@@ -21,6 +21,8 @@ public class PostController {
     public PostController(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
+
+
     @PostMapping("/posts")
     public ResponseEntity<Post> createPost(@RequestBody Post post){
       postRepository.save(post);
@@ -53,10 +55,6 @@ public class PostController {
         return  ResponseEntity.ok(post);
 
     }
-
-
-
-
 
 
 }
