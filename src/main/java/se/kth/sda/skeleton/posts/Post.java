@@ -1,10 +1,20 @@
 package se.kth.sda.skeleton.posts;
 
-// @TODO add Hibernate annotations
-public class Post {
-    private Long id;
+import javax.persistence.*;
 
+// @TODO add Hibernate annotations
+@Entity
+public class Post {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //the field:
+
+    private Long id;
     private String body;
+
+    //the relationship :
+
 
     public Post() {
     }
