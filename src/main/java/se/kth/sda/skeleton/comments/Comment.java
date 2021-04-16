@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Entity
 public class Comment {
 // filds
+    //add new comment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,7 +60,7 @@ public class Comment {
 
         this.body = updatedPostComment.body;
     }
-
+// a new comment
     public Post getCommentedPost() {
         return commentedPost;
     }
