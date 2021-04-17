@@ -41,4 +41,17 @@ public class CommentController {
         return ResponseEntity.ok(post.getPostCommentList());
     }
 
+    @PutMapping("/comments/{id}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @Validated @RequestBody Comment commentParams){
+        Comment existingComment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        commentParams.setId(id);
+        commentRepository.save(commentParams);
+        return ResponseEntity.ok(commentParams);
+    }
+
+    @DeleteMapping("/comments/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCommentById(@PathVariable Long id){
+        commentRepository.deleteById(id);
+    }
 }

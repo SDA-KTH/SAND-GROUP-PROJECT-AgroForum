@@ -51,4 +51,9 @@ public class Post {
         this.postCommentList = postCommentList;
     }
 
+
+    public void updatePost(Post updatedPost){
+        this.body=updatedPost.body;
+    }
+
 }

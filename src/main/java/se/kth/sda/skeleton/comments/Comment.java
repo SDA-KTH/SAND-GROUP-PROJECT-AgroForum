@@ -52,4 +52,8 @@ public class Comment{
     public void setCommentedPost(Post commentedPost) {
         this.commentedPost = commentedPost;
     }
+
+    public void updateComment(Comment updatedPostComment){
+        this.body = updatedPostComment.body;
+    }
 }
