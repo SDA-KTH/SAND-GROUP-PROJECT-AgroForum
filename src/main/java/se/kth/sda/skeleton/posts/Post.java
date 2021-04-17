@@ -1,4 +1,6 @@
 package se.kth.sda.skeleton.posts;
+import se.kth.sda.skeleton.comments.Comment;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,11 @@ public class Post {
 
     private Long id;
     private String body;
+
+
+    @OneToMany(mappedBy = "commentedPost")
+    private List<Comment> postCommentList;
+
 
     public Post() {
     }
@@ -34,6 +41,14 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public List<Comment> getPostCommentList() {
+        return postCommentList;
+    }
+
+    public void setPostCommentList(List<Comment> postCommentList) {
+        this.postCommentList = postCommentList;
     }
 
 }
