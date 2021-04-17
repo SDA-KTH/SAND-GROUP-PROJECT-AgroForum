@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.kth.sda.skeleton.ResourceNotFoundException;
 import se.kth.sda.skeleton.posts.Post;
 import se.kth.sda.skeleton.posts.PostRepository;
+
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -35,4 +34,11 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
 
     }
+
+    @GetMapping("/posts/{postId}/comments")
+    public ResponseEntity<List<Comment>> getPostCommentsList(@PathVariable Long postId){
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        return ResponseEntity.ok(post.getPostCommentList());
+    }
+
 }
