@@ -1,10 +1,11 @@
 // NPM Packages
 import React from "react";
+// Home page
 export default function HomePage() {
   return (
     <div className="card">
       <div className="card-body">
-        <h4 className="card-title">SDA starter template</h4>
+        <h4 className="card-title">SAND starter template</h4>
         <p>
           This starter template is based on Spring, PostgreSQL, React, React
           router and Axios. Check the following links for documentation and
