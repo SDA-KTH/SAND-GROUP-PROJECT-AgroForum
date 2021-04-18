@@ -16,19 +16,21 @@ import java.util.List;
 public class PostController {
 
     PostRepository postRepository ;
+    PostService postService;
 
     @Autowired
-    public PostController(PostRepository postRepository) {
+    public PostController(PostRepository postRepository,PostService postService) {
         this.postRepository = postRepository;
+        this.postService=postService;
     }
 
 
     @PostMapping("/posts")
     public ResponseEntity<Post> createPost(@RequestBody Post post){
-      postRepository.save(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(post);
+            postRepository.save(post);
+            return ResponseEntity.status(HttpStatus.CREATED).body(post);
 
-    }
+        }
     @GetMapping("/posts")
     public List<Post> listAllPosts(){
         List<Post> posts= postRepository.findAll();
@@ -37,8 +39,8 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Post> deletePost(@PathVariable long id){
-        Post post=postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        postRepository.delete(post);
+     //  Post post=postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Post post =postService.deletePost(id);
         return ResponseEntity.ok(post);
     }
 
@@ -49,12 +51,12 @@ public class PostController {
     }
     @PutMapping("posts/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable long id, @RequestBody Post updatedPost) {
-        postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        updatedPost.setId(id);
-        Post post =postRepository.save(updatedPost);
+        Post post =postService.updatePost(id,updatedPost);
         return  ResponseEntity.ok(post);
 
     }
+
+
 
 
 }
