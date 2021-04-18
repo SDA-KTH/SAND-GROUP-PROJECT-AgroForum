@@ -7,4 +7,5 @@ import java.util.Optional;
     @TODO Implement service methods.
  */
 public class PostService {
+
 }

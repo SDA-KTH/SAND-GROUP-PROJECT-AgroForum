@@ -24,9 +24,14 @@ public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger("AuthService");
 
     public String getLoggedInUserEmail() {
-        Object maybeUserDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+
+        /*Object maybeUserDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
         if (maybeUserDetails instanceof UserDetails) {
-            return ((UserDetails) maybeUserDetails).getUsername();
+            return ((UserDetails) maybeUserDetails).getUsername();*/
         }
         return null;
     }
