@@ -1,18 +1,27 @@
 body {
   min-height: 100vh;
-  background: linear-gradient(to right, #2c3e50, #3498db);
+  min-height: 100vh;
+    background-image: url(./components/assets/T-Estrellas_Organic_Farm2.png);
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+}
+
+body {
+  background: linear-gradient(to right, #44a544, #3498db);
+  z-index: -6;
+
 }
 
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.logo {
+  height: 25vmin;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #235223;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,3 +34,4 @@ body {
 .App-link {
   color: #09d3ac;
 }
+

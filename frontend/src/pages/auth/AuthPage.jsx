@@ -5,6 +5,7 @@ import React from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Auth from "../../services/Auth";
+import Logo from "../../components/Logo"
 
 export default function LoginPage() {
   // Methods
@@ -27,8 +28,9 @@ export default function LoginPage() {
       <div className="container">
         <div className="row mt-4">
           <div className="col-md-6 " style={{ color: "white" }}>
-            <h1>SDA</h1>
-            <p>Starter template</p>
+            <Logo />
+            {/* <h1>AgroForum</h1>
+            <p>For Quality Harvest</p> */}
           </div>
 
           <div className="col-md-6">
