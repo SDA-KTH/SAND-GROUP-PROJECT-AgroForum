@@ -7,9 +7,9 @@ export default function HomePage() {
       <div className="card-body">
         <h4 className="card-title">Welcome to AgroForum</h4>
         <p>
-          This online forum is dedicated to about any topic related to 
-          agriculture. The main goals are to share knowledge and experience, and discuss the challenges 
-          that industry faces in our current time. <br/> <br/>
+          This online forum is dedicated to discussing about any topic related to 
+          agriculture. The main goals are to share knowledge and experiences, and reflect on the challenges 
+          that the industry faces in our current time. <br/> <br/>
 
           You are encourage to speak your mind, but let the conversation be friendly, polite and mutually 
           beneficial. 
