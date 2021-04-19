@@ -10,9 +10,8 @@ import se.kth.sda.skeleton.user.UserService;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
-public class PostService {
+class PostService {
 
     PostRepository postRepository;
     UserService userService;

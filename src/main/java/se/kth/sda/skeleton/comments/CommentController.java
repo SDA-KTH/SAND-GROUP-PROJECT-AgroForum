@@ -17,20 +17,20 @@ public class CommentController {
 
     CommentRepository commentRepository;
     PostRepository postRepository;
+    CommentService  commentService;
+
 
     @Autowired
-
-    public CommentController(CommentRepository commentRepository, PostRepository postRepository) {
+    public CommentController(CommentRepository commentRepository, PostRepository postRepository,CommentService  commentService) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.commentService = commentService;
     }
 
 
     @PostMapping("/posts/{postId}/comments")
-    public ResponseEntity<Comment> createComment(@PathVariable Long postId, @Validated @RequestBody Comment comment){
-        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
-        comment.setCommentedPost(post);
-        commentRepository.save(comment);
+    public ResponseEntity<Comment> createComment(@PathVariable Long postId,@RequestBody Comment createcomment){
+        Comment comment = commentService.createComment(postId,createcomment);
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
 
     }
@@ -42,16 +42,17 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @Validated @RequestBody Comment commentParams){
-        Comment existingComment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        commentParams.setId(id);
-        commentRepository.save(commentParams);
-        return ResponseEntity.ok(commentParams);
+    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment updateComment){
+        Comment comment = commentService.updateComment(id,updateComment);
+        return ResponseEntity.ok(comment);
     }
 
     @DeleteMapping("/comments/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCommentById(@PathVariable Long id){
-        commentRepository.deleteById(id);
+    public ResponseEntity<Comment> deleteComment(@PathVariable Long id){
+      Comment comment = commentService.deleteComment(id);
+      return ResponseEntity.ok(comment);
     }
+
+
 }

@@ -39,7 +39,6 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     public ResponseEntity<Post> deletePost(@PathVariable long id){
-     //  Post post=postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         Post post =postService.deletePost(id);
         return ResponseEntity.ok(post);
     }
@@ -55,8 +54,5 @@ public class PostController {
         return  ResponseEntity.ok(post);
 
     }
-
-
-
 
 }
