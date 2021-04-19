@@ -6,11 +6,11 @@ body {
   background-size: cover;
 }
 
-body {
+/* body {
   background: linear-gradient(to right, #44a544, #3498db);
   z-index: -6;
 
-}
+} */
 
 .App {
   text-align: center;
