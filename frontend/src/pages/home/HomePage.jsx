@@ -5,13 +5,17 @@ export default function HomePage() {
   return (
     <div className="card">
       <div className="card-body">
-        <h4 className="card-title">SDA starter template</h4>
+        <h4 className="card-title">Welcome to AgroForum</h4>
         <p>
-          This starter template is based on Spring, PostgreSQL, React, React
-          router and Axios. Check the following links for documentation and
-          guides:
+          This online forum is dedicated to about any topic related to 
+          agriculture. The main goals are to share knowledge and experience, and discuss the challenges 
+          that industry faces in our current time. <br/> <br/>
+
+          You are encourage to speak your mind, but let the conversation be friendly, polite and mutually 
+          beneficial. 
+
         </p>
-        <ul>
+        {/* <ul>
           <li>
             <a href="https://spring.io/projects/spring-boot">Spring</a>
           </li>
@@ -30,7 +34,8 @@ export default function HomePage() {
             <a href="https://github.com/axios/axios">Axios</a>
           </li>
         </ul>
-      </div>
+       */
+       }</div>
     </div>
   );
 }
