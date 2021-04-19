@@ -1,10 +1,15 @@
 package se.kth.sda.skeleton.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
+import se.kth.sda.skeleton.posts.Post;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.xml.stream.events.Comment;
+import java.util.List;
 
 @Entity
 @Table(name="account")
@@ -27,6 +32,12 @@ public class User {
     @Length(min = 3, max=100, message = "Name must be between 3-100 characters")
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "postOwner")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "commentOwner")
+    private List<Comment> comments;
 
     // Hibernate needs a default constructor to function
     public User() {}
@@ -54,6 +65,8 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
+    @JsonProperty(value = "userPassword")
     public String getPassword() {
         return password;
     }
@@ -68,5 +81,21 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
