@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import se.kth.sda.skeleton.ResourceNotFoundException;
+import se.kth.sda.skeleton.comments.Comment;
 import se.kth.sda.skeleton.user.UserRepository;
 import se.kth.sda.skeleton.user.UserService;
 
@@ -12,16 +13,13 @@ import java.util.Optional;
 
 @Service
 class PostService {
-
     PostRepository postRepository;
     UserService userService;
 
-
     @Autowired
     public  PostService (PostRepository postRepository ,  UserService userService){
-
-
-
+  this.postRepository=postRepository;
+  this.userService= userService;
     }
 public Post updatePost(Long id , Post updatedPost){
     postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -30,15 +28,15 @@ public Post updatePost(Long id , Post updatedPost){
 return post ;
 }
 
-    public Post deletePost(Long id )
+   public Post deletePost(Long id )
     {
-        Post post=postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         postRepository.delete(post);
         return post;
     }
 
-    public Post createPost(Post createdPost){
-        Post post =postRepository.save(createdPost);
-        return post;
+  public Post createPost(Post createdPost){
+       postRepository.save(createdPost);
+        return createdPost;
     }
     }

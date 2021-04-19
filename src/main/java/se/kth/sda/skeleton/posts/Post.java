@@ -16,7 +16,7 @@ public class Post {
     private String body;
 
 
-    @OneToMany(mappedBy = "commentedPost")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE,mappedBy = "commentedPost")
     private List<Comment> postCommentList;
 
 

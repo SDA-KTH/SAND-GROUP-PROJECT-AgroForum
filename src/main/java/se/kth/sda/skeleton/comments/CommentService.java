@@ -11,8 +11,9 @@ class CommentService {
     CommentRepository commentRepository;
     PostRepository postRepository;
     @Autowired
-    public CommentService (CommentRepository commentRepository){
+    public CommentService (CommentRepository commentRepository,PostRepository postRepository){
         this.commentRepository = commentRepository;
+        this.postRepository=postRepository;
 
 }
 
@@ -36,8 +37,5 @@ public  Comment updateComment(Long id,Comment updateComment) {
         commentRepository.save(comment);
         return comment;
     }
-
-
-
 
 }

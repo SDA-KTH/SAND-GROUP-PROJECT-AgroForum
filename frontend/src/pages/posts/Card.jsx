@@ -9,6 +9,7 @@ export default function PostCard({ post, onDeleteClick }) {
         <button className="btn btn-danger" onClick={onDeleteClick}>
           Delete
         </button>
+        <button class="btn btn-danger">Comment</button>
       </div>
     </div>
   );

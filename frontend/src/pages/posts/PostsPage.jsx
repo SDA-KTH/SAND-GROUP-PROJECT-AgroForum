@@ -52,4 +52,7 @@ export default function PostsPage() {
       {CardsArray}
     </div>
   );
+
+
+
 }

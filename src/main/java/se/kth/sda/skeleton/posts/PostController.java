@@ -26,8 +26,8 @@ public class PostController {
 
 
     @PostMapping("/posts")
-    public ResponseEntity<Post> createPost(@RequestBody Post post){
-            postRepository.save(post);
+    public ResponseEntity<Post> createPost(@RequestBody Post createpost){
+       Post post=postService.createPost(createpost);
             return ResponseEntity.status(HttpStatus.CREATED).body(post);
 
         }
@@ -38,9 +38,9 @@ public class PostController {
     }
 
     @DeleteMapping("/posts/{id}")
-    public ResponseEntity<Post> deletePost(@PathVariable long id){
-        Post post =postService.deletePost(id);
-        return ResponseEntity.ok(post);
+    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
+        Post post = postService.deletePost(id);
+        return  ResponseEntity.ok(post);
     }
 
     @GetMapping("/posts/{id}")
