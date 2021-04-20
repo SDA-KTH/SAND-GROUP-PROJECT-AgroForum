@@ -10,7 +10,7 @@ import java.security.Principal;
 
 @RequestMapping("/users")
 @RestController
-public class UserController {
+public class  UserController {
 
     UserRepository userRepository;
     UserService userService;

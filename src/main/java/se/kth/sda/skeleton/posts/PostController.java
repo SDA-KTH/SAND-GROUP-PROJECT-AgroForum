@@ -5,54 +5,72 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.kth.sda.skeleton.ResourceNotFoundException;
+import se.kth.sda.skeleton.user.User;
+import se.kth.sda.skeleton.user.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 /*
     @TODO create the methods needed to implement the API.
     Don't forget to add necessary annotations.
  */
+@RequestMapping("/posts")
 @RestController
 public class PostController {
 
-    PostRepository postRepository ;
+    PostRepository postRepository;
+    PostService postService;
+    UserService userService;
+    CommentRepository commentRepository;
 
     @Autowired
     public PostController(PostRepository postRepository) {
         this.postRepository = postRepository;
+        this.postService = postService;
+        this.userService = userService;
     }
-    @PostMapping("/posts")
-    public ResponseEntity<Post> createPost(@RequestBody Post post){
-      postRepository.save(post);
+    // Creates new post by User
+    @PostMapping
+    public ResponseEntity<Post> createPost(@RequestBody Post post, Principal principal){
+        String useName = principal.getName();
+        User user = userService.findUserByEmail(useName);
+        post.setPostOwner(user);
+        postRepository.save(post);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
-
     }
-    @GetMapping("/posts")
+
+    // Returns all posts
+    @GetMapping
     public List<Post> listAllPosts(){
-        List<Post> posts= postRepository.findAll();
-        return posts;
+        return postRepository.findAll();
     }
 
-    @DeleteMapping("/posts/{id}")
-    public ResponseEntity<Post> deletePost(@PathVariable long id){
-        Post post=postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        postRepository.delete(post);
-        return ResponseEntity.ok(post);
-    }
-
-    @GetMapping("/posts/{id}")
+    // Returns an id-defined post
+    @GetMapping("/{id}")
     public ResponseEntity<Post> getPost(@PathVariable long id){
-       Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post);
     }
-    @PutMapping("posts/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable long id, @RequestBody Post updatedPost) {
-        postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        updatedPost.setId(id);
-        Post post =postRepository.save(updatedPost);
-        return  ResponseEntity.ok(post);
 
+    // Updates an id-defined post
+    @PutMapping("/{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable long id, @RequestBody Post updatedPost,
+                                           Principal principal) {
+        Post post = postService.updatePost(id, updatedPost, principal);
+        return  ResponseEntity.ok(post);
     }
+
+    // Deletes an id-defined post
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePost(@PathVariable long id, Principal principal){
+        Post post = postService.deletePost(id, principal);
+        postRepository.delete(post);
+    }
+
+
 
 
 
