@@ -1,6 +1,8 @@
 package se.kth.sda.skeleton.posts;
 
+import se.kth.sda.skeleton.comments.Comment;
 import se.kth.sda.skeleton.user.User;
+
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -10,9 +12,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-
 import javax.validation.constraints.NotNull;
-import javax.xml.stream.events.Comment;
 
 import java.util.Date;
 import java.util.List;

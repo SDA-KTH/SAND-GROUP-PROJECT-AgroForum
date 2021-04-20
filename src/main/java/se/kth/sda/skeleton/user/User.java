@@ -36,7 +36,7 @@ public class User {
     @OneToMany(mappedBy = "postOwner")
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "commentOwner")
+    @OneToMany(mappedBy = "userCommentOwner")
     private List<Comment> comments;
 
     // Hibernate needs a default constructor to function

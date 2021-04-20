@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.kth.sda.skeleton.ResourceNotFoundException;
+import se.kth.sda.skeleton.comments.CommentRepository;
 import se.kth.sda.skeleton.user.User;
 import se.kth.sda.skeleton.user.UserService;
 
@@ -25,7 +26,8 @@ public class PostController {
     CommentRepository commentRepository;
 
     @Autowired
-    public PostController(PostRepository postRepository) {
+    public PostController(PostRepository postRepository, PostService postService,
+                          UserService userService) {
         this.postRepository = postRepository;
         this.postService = postService;
         this.userService = userService;
@@ -69,12 +71,4 @@ public class PostController {
         Post post = postService.deletePost(id, principal);
         postRepository.delete(post);
     }
-
-
-
-
-
-
-
-
 }
